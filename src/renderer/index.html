@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self'; img-src 'self' data:"
+    />
+    <title>RetroEmulator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="brand-name">RetroEmulator</span>
+      </div>
+
+      <nav id="nav" aria-label="Biblioteca"></nav>
+
+      <div class="sidebar-foot">
+        <button id="pad-status" class="pad-status" type="button" data-level="none" title="Abrir configurações de controle">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="pad-text">
+            <span id="pad-label">Nenhum controle conectado</span>
+            <span id="pad-sub"></span>
+          </span>
+        </button>
+        <button id="btn-settings" class="nav-item" type="button">Configurações</button>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div class="titles">
+          <h1 id="view-title">Todos os jogos</h1>
+          <p id="view-sub"></p>
+        </div>
+        <input id="search" type="search" placeholder="Buscar jogo…" autocomplete="off" spellcheck="false" />
+        <button id="btn-keys" class="btn" type="button" title="Escolher as teclas do jogo">Teclado</button>
+        <button id="btn-theme" class="icon-btn" type="button" title="Alternar tema claro/escuro" aria-label="Alternar tema claro/escuro"></button>
+      </header>
+
+      <div id="content" class="content">
+        <section id="grid" class="grid" aria-label="Jogos"></section>
+        <section id="empty" class="empty" hidden></section>
+        <section id="settings" class="settings" hidden></section>
+      </div>
+
+      <footer class="hints" id="hints">
+        <span><kbd>Enter</kbd> / <kbd>✕</kbd> / <kbd>A</kbd> Jogar</span>
+        <span><kbd>F</kbd> / <kbd>△</kbd> / <kbd>Y</kbd> Favoritar</span>
+        <span><kbd>L1</kbd> <kbd>R1</kbd> / <kbd>LB</kbd> <kbd>RB</kbd> Trocar lista</span>
+        <span>No jogo: <kbd>L3</kbd>+<kbd>R3</kbd> menu · <kbd id="hint-exit">Esc</kbd> sair</span>
+      </footer>
+    </main>
+
+    <div id="progress" class="progress" hidden role="status" aria-live="polite">
+      <div class="progress-text">
+        <strong id="progress-label"></strong>
+        <span id="progress-detail"></span>
+      </div>
+      <div class="bar"><div id="progress-bar"></div></div>
+    </div>
+
+    <div id="toast" class="toast" hidden role="alert"></div>
+
+    <div id="overlay" class="overlay" hidden>
+      <div class="overlay-card">
+        <p class="overlay-kicker">Jogando agora</p>
+        <h2 id="overlay-title"></h2>
+        <p id="overlay-pad" class="overlay-pad" data-level="none">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="overlay-pad-text"></span>
+        </p>
+        <p>Feche o emulador (<kbd id="overlay-exit">Esc</kbd>) para voltar à biblioteca.</p>
+        <p class="muted">No controle, <kbd>L3</kbd> + <kbd>R3</kbd> abre o menu para salvar e carregar o progresso.</p>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

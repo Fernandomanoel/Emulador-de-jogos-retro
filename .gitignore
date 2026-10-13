@@ -1,0 +1,10 @@
+# dependências e app gerado
+node_modules/
+dist/
+
+# dados locais: RetroArch baixado, jogos, saves e configurações do usuário
+data/
+
+# arquivos da máquina
+*.lnk
+.impeccable/

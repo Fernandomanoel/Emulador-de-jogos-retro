@@ -1,0 +1,17 @@
+{
+  "name": "retro-emulator",
+  "productName": "RetroEmulator",
+  "version": "1.0.0",
+  "description": "Launcher de emulação com download automático do RetroArch e suporte a controle de PS3",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "node scripts/build.js"
+  },
+  "dependencies": {
+    "7zip-bin": "^5.2.0"
+  },
+  "devDependencies": {
+    "electron": "22.3.27"
+  }
+}
