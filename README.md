@@ -5,6 +5,18 @@ Launcher de jogos retrô para Windows. Ele organiza a sua biblioteca de jogos, b
 
 Nenhum jogo nem BIOS acompanha o projeto: você aponta as pastas onde estão os seus.
 
+## Baixar e instalar
+
+1. Baixe o arquivo `RetroEmulator-1.0.0-win64.zip` na página de
+   [Releases](https://github.com/Fernandomanoel/Emulador-de-jogos-retro/releases/latest).
+2. Extraia o zip em qualquer pasta.
+3. Abra `RetroEmulator.exe`.
+4. Em Configurações → Consoles e pastas, indique onde estão os seus jogos.
+
+Precisa de Windows de 64 bits. Como o programa não tem assinatura digital, o Windows pode mostrar o aviso
+"O Windows protegeu o computador"; clique em "Mais informações" e depois em "Executar assim mesmo".
+Na primeira vez que você abrir um jogo, o app baixa o RetroArch (cerca de 200 MB).
+
 ## Consoles
 
 | Console | Emulador (core do RetroArch) | Arquivos |
