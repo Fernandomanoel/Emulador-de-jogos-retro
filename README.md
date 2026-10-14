@@ -7,11 +7,15 @@ Nenhum jogo nem BIOS acompanha o projeto: você aponta as pastas onde estão os 
 
 ## Baixar e instalar
 
-1. Baixe o arquivo `RetroEmulator-1.0.0-win64.zip` na página de
+1. Baixe o `RetroEmulator-Setup-1.0.0.exe` na página de
    [Releases](https://github.com/Fernandomanoel/Emulador-de-jogos-retro/releases/latest).
-2. Extraia o zip em qualquer pasta.
-3. Abra `RetroEmulator.exe`.
-4. Em Configurações → Consoles e pastas, indique onde estão os seus jogos.
+2. Abra o arquivo. Ele instala o programa e cria os atalhos na área de trabalho e no menu Iniciar.
+3. Em Configurações → Consoles e pastas, indique onde estão os seus jogos.
+
+Não precisa de Node nem de permissão de administrador. Para remover, use "Aplicativos instalados" do Windows
+ou o `Desinstalar.cmd` na pasta do programa.
+
+Prefere não instalar? Baixe o `RetroEmulator-1.0.0-win64.zip`, extraia em qualquer pasta e abra `RetroEmulator.exe`.
 
 Precisa de Windows de 64 bits. Como o programa não tem assinatura digital, o Windows pode mostrar o aviso
 "O Windows protegeu o computador"; clique em "Mais informações" e depois em "Executar assim mesmo".
@@ -64,6 +68,12 @@ npm run build
 
 O app sai em `dist\RetroEmulator-win32-x64\RetroEmulator.exe`. Feche o app antes de gerar de novo.
 
+Para gerar o instalador (`dist\RetroEmulator-Setup-<versão>.exe`), depois do build:
+
+```bash
+npm run setup
+```
+
 O projeto usa o Electron 22 de propósito: é a última versão que abre no Windows 7 e 8.
 
 ## Estrutura
@@ -76,6 +86,7 @@ O projeto usa o Electron 22 de propósito: é a última versão que abre no Wind
 - `src/controllers.js`: detecção de controles e drivers no Windows
 - `src/library.js`: leitura das pastas de jogos
 - `src/renderer/`: interface
-- `scripts/`: geração do app e do ponteiro do mouse
+- `installer/`: scripts de instalação e desinstalação usados pelo Setup
+- `scripts/`: geração do app, do instalador e do ponteiro do mouse
 
 Tudo que o app baixa ou grava (RetroArch, saves, configurações) fica na pasta `data/`, que não vai para o repositório.
