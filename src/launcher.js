@@ -1,5 +1,6 @@
 const { spawn } = require('child_process');
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const paths = require('./paths');
 const consoles = require('./consoles');
@@ -22,6 +23,24 @@ function installPointer() {
   try {
     if (!fs.readFileSync(ours).equals(fs.readFileSync(theirs))) fs.copyFileSync(ours, theirs);
   } catch {}
+}
+
+// Grava os ajustes de desempenho do console no .opt do core, preservando as outras opções.
+function applyCoreOptions(c) {
+  if (!c.coreOptions) return;
+  const file = path.join(paths.retroarchDir(), 'config', c.coreOptions.dir, `${c.coreOptions.dir}.opt`);
+  let text = '';
+  try {
+    text = fs.readFileSync(file, 'utf8');
+  } catch {}
+  for (const [key, value] of Object.entries(c.coreOptions.values)) {
+    const line = `${key} = "${value}"`;
+    const existing = new RegExp(`^${key} = .*$`, 'm');
+    if (existing.test(text)) text = text.replace(existing, line);
+    else text = `${text}${text && !text.endsWith('\n') ? '\n' : ''}${line}\n`;
+  }
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, text);
 }
 
 // Configuração aplicada por cima do retroarch.cfg a cada partida.
@@ -68,9 +87,14 @@ async function launch(game) {
   if (running) throw new Error('Já existe um jogo aberto');
   writeLaunchConfig(c);
   installPointer();
+  applyCoreOptions(c);
 
   const args = ['-L', paths.coreFile(c.core), game.path, '--appendconfig', paths.launchConfig()];
   const child = spawn(paths.retroarchExe(), args, { cwd: paths.retroarchDir(), stdio: 'ignore' });
+  // Prioridade acima do normal: em processador de 2 núcleos o Windows tira menos tempo do jogo
+  try {
+    os.setPriority(child.pid, os.constants.priority.PRIORITY_ABOVE_NORMAL);
+  } catch {}
   running = { path: game.path, title: game.title };
   notify({ running });
 

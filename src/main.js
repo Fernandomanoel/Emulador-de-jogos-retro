@@ -160,6 +160,8 @@ if (!app.requestSingleInstanceLock()) {
     installer.onProgress((p) => send('install:progress', p));
     launcher.onState((state) => {
       send('game:state', state);
+      // Minimizado, o launcher não disputa o vídeo com o jogo
+      if (state.running && win) win.minimize();
       if (!state.running && win) {
         if (win.isMinimized()) win.restore();
         win.focus();

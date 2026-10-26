@@ -4,6 +4,7 @@
 //   b = botão de baixo, a = direita, y = esquerda, x = cima, l/r = ombros, l2/r2 = gatilhos.
 // stick: nome do segundo analógico (ou dos botões C), quando o console tem.
 // keyPreset: estilo de teclado que vem de fábrica (ver keyboard.js).
+// coreOptions: ajustes de desempenho gravados no .opt do core antes de cada partida.
 const START_SELECT = [
   ['start', 'Start'],
   ['select', 'Select'],
@@ -62,6 +63,11 @@ module.exports = [
     keyPreset: 'modern',
     buttons: [['b', 'A'], ['y', 'B'], ['l2', 'Z'], ['l', 'L'], ['r', 'R'], ['start', 'Start']],
     stick: 'Botão C',
+    // Resolução original do N64 e vídeo em outro núcleo do processador: o Intel HD integrado não dá conta de 640x480
+    coreOptions: {
+      dir: 'Mupen64Plus-Next',
+      values: { 'mupen64plus-43screensize': '320x240', 'mupen64plus-ThreadedRenderer': 'True' },
+    },
   },
   {
     id: 'ps1',
@@ -86,5 +92,10 @@ module.exports = [
     keyPreset: 'modern',
     buttons: [['a', 'A'], ['b', 'B'], ['x', 'X'], ['y', 'Y'], ['r', 'Z'], ['l2', 'L'], ['r2', 'R'], ['start', 'Start']],
     stick: 'Analógico C',
+    // Shaders compilados em segundo plano (3) tiram os engasgos. Não ligar dolphin_vi_skip: no teste travou o jogo.
+    coreOptions: {
+      dir: 'dolphin-emu',
+      values: { dolphin_shader_compilation_mode: '3' },
+    },
   },
 ];
