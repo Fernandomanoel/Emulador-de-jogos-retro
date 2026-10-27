@@ -1,6 +1,5 @@
 const { spawn } = require('child_process');
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
 const paths = require('./paths');
 const consoles = require('./consoles');
@@ -91,10 +90,6 @@ async function launch(game) {
 
   const args = ['-L', paths.coreFile(c.core), game.path, '--appendconfig', paths.launchConfig()];
   const child = spawn(paths.retroarchExe(), args, { cwd: paths.retroarchDir(), stdio: 'ignore' });
-  // Prioridade acima do normal: em processador de 2 núcleos o Windows tira menos tempo do jogo
-  try {
-    os.setPriority(child.pid, os.constants.priority.PRIORITY_ABOVE_NORMAL);
-  } catch {}
   running = { path: game.path, title: game.title };
   notify({ running });
 
