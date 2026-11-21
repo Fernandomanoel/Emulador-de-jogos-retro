@@ -81,6 +81,18 @@ module.exports = [
     buttons: [['b', '✕'], ['a', '○'], ['y', '□'], ['x', '△'], ['l', 'L1'], ['r', 'R1'], ['l2', 'L2'], ['r2', 'R2'], ...START_SELECT],
   },
   {
+    id: 'ps2',
+    name: 'PlayStation 2',
+    short: 'PS2',
+    core: 'pcsx2',
+    exts: ['.iso', '.chd', '.cso', '.gz'],
+    // A BIOS do PS2 não pode ser baixada: o usuário copia a do próprio console para esta pasta (dentro de retroarch\system)
+    bios: 'pcsx2/bios',
+    hue: 240,
+    keyPreset: 'lanhouse',
+    buttons: [['b', '✕'], ['a', '○'], ['y', '□'], ['x', '△'], ['l', 'L1'], ['r', 'R1'], ['l2', 'L2'], ['r2', 'R2'], ...START_SELECT],
+  },
+  {
     id: 'gamecube',
     name: 'GameCube',
     short: 'GC',

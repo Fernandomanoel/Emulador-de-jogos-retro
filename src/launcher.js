@@ -82,6 +82,11 @@ async function launch(game) {
   if (!c) throw new Error('Console desconhecido');
   if (!fs.existsSync(game.path)) throw new Error('Arquivo do jogo não encontrado');
 
+  if (c.bios) {
+    const dir = paths.systemDir(...c.bios.split('/'));
+    fs.mkdirSync(dir, { recursive: true });
+    if (!fs.readdirSync(dir).length) throw new Error(`Falta a BIOS do ${c.name}. Copie o arquivo da BIOS do seu console para: ${dir}`);
+  }
   await installer.installConsole(c.id);
   if (running) throw new Error('Já existe um jogo aberto');
   writeLaunchConfig(c);
