@@ -8,3 +8,8 @@ data/
 # arquivos da máquina
 *.lnk
 .impeccable/
+
+# jogos e pacotes baixados nunca vao para o repositorio
+*.7z*
+*.iso
+*.rar
